@@ -4,34 +4,37 @@ public class Main {
 
     public static void main(String[] args){
 
-        System.out.println("Dog's count " +Dog.getDogsCount());
+        System.out.println("Dog's count " + Dog.getDogsCount());
 
         Dog lab = new Dog();
-        lab.setPaws(4);
-        lab.setTail(1);
         lab.setName("Charley");
-        lab.setBread("Lab");
-        lab.setSize("Average");
+        lab.setBreed("Lab");
+        lab.setSize(Size.AVARAGE);
         lab.bite();
 
         Dog sheppard = new Dog();
-        sheppard.setPaws(4);
-        sheppard.setTail(1);
         sheppard.setName("Mike");
-        sheppard.setBread("Sheppard");
+        sheppard.setBreed("Sheppard");
+        sheppard.setSize(Size.BIG);
         sheppard.bite();
 
         Dog doberman = new Dog();
-        doberman.setPaws(4);
-        doberman.setTail(1);
         doberman.setName("Jack");
-        doberman.setBread("Doberman");
+        doberman.setBreed("Doberman");
+        doberman.setSize(Size.BIG);
         doberman.bite();
 
+        Size s = Size.SMALL;
+        Size s1 = Size.valueOf("BIG");
+   //     System.out.println(s1);
 
-        System.out.println("Lab's name is "+lab.getName());
-        System.out.println("Sheppard's name is "+sheppard.getName());
-        System.out.println("Lab has "+lab.getPaws()+"paws");
+        Size[] values = Size.values();
+        for (int i=0; i<values.length; i++) {
+            System.out.println(values[i]);
+
+        }
+
 
     }
+
 }
