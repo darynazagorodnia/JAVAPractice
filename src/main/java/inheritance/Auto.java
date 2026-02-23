@@ -1,6 +1,6 @@
 package inheritance;
 
-public class Auto {
+public abstract class Auto {
 
     private String producer;
     private String model;
@@ -16,20 +16,23 @@ public class Auto {
         System.out.println("Auto was initialized");
     }
 
-    public void start(){
+    public abstract void energize();
+
+    public void start() {
         isRunning = true;
         currentSpeed = 10;
         System.out.println("Auto is starting");
     }
 
-    public void stop(){
+    public void stop() {
         isRunning = false;
         currentSpeed = 0;
         System.out.println("Auto has stopped");
     }
-    public void accelerate(int kmPerHour){
-        currentSpeed+=kmPerHour;
-        System.out.println("Accelerating. Current speed is "+currentSpeed+" kmPerHour");
+
+    public void accelerate(int kmPerHour) {
+        currentSpeed += kmPerHour;
+        System.out.println("Accelerating. Current speed is " + currentSpeed + " kmPerHour");
     }
 
     public String getProducer() {
@@ -46,6 +49,11 @@ public class Auto {
 
     public boolean isRunning() {
         return isRunning;
+    }
+
+
+    public void setCurrentSpeed(int currentSpeed) {
+        this.currentSpeed = currentSpeed;
     }
 
     @Override
