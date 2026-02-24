@@ -1,23 +1,27 @@
 package interfaces;
 
-public class Pizza implements Deliverable {
-
+public class Pizza implements Deliverable, Orderrable {
 
     private String name;
     private int quantity;
-    private double price;
+    private int price;
     private Size size;
 
-    public Pizza(String name, int quantity, double price, Size size) {
-      this.name = name;
-      this.quantity = quantity;
-      this.price = price;
-      this.size = size;
+    public Pizza(String name, int quantity, int price, Size size) {
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+        this.size = size;
     }
 
     @Override
-    public void calcDeliveryPrice() {
-        if (size == Size.XL || quantity > 1);
+    public int calcOrderPrice() {
+        return quantity * price;
+    }
+
+    @Override
+    public int calcDeliveryPrice() {
+        if (size == Size.XL || quantity > 1)
         return 0;
         else {
             return 7;
@@ -33,7 +37,7 @@ public class Pizza implements Deliverable {
         return quantity;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
 
