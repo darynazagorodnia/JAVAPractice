@@ -17,4 +17,6 @@ public class Fridge extends Electronics {
 
     }
 
+
+
 }
