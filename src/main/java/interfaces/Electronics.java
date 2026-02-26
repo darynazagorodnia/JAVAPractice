@@ -1,6 +1,6 @@
 package interfaces;
 
-public abstract class Electronics implements Deliverable, Orderrable {
+public abstract class Electronics implements Pricable {
 
     private String make;
     private String model;
