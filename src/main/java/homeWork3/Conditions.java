@@ -11,7 +11,7 @@ public class Conditions {
             System.out.println("Доступ дозволено!");
         }
 // Перевірка температури
-        int temp = 32;
+        int temp = 20;
         if (temp < 25) {
             System.out.println("Прохолодно!");
         } else if (temp <= 30) {
