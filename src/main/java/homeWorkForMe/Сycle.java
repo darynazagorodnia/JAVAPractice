@@ -11,7 +11,7 @@ public class Сycle {
             a++;
         }
 
-        int volum = 49;
+        int volum = 49 ;
         do {
             System.out.println("full");
         } while (volum > 50);

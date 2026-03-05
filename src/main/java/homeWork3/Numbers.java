@@ -6,8 +6,7 @@ public class Numbers {
         for (int a = 1; a <= 5; a++)
             System.out.println("Номер " + a);
 
-        String spase = "   ";
-        System.out.println("");
+        System.out.println();
 
         for (int i = 10; i >= 1; i--)
             System.out.println("Номер " + i);
