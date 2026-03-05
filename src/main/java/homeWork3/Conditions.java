@@ -11,10 +11,10 @@ public class Conditions {
             System.out.println("Доступ дозволено!");
         }
 // Перевірка температури
-        int temp = 20;
+        int temp = 27;
         if (temp < 25) {
             System.out.println("Прохолодно!");
-        } else if (temp <= 30) {
+        } else if (temp >= 25 && temp <= 30) {
             System.out.println("Тепло!");
         } else {
             System.out.println("Жарко!");
@@ -27,7 +27,7 @@ public class Conditions {
             System.out.println("Добре");
         } else if (mark >= 60) {
             System.out.println("Задовільно");
-        } else if (mark >=0) {
+        } else if (mark >= 0) {
             System.out.println("Погано");
         }
     }
