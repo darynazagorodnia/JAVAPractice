@@ -1,28 +1,56 @@
 package colectionClass;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class CollectionRunner {
 
     public static void main(String[] args) {
-       /* List<String> colors = new ArrayList<>();
+        List<Card> decOfCards = new ArrayList<>();
+        for (Card.Face face : Card.Face.values()) {
+            for (Card.Suit suit : Card.Suit.values()) {
+                decOfCards.add(new Card(suit, face));
+            }
+        }
 
-        colors.add("yellow");
-        colors.add("blue");
-        colors.add("green");
-        colors.add("black");
-        colors.add("red");
+        Collections.shuffle(decOfCards);
+        Collections.sort(decOfCards);
 
-        System.out.println("List before sorting " + colors);
-        Collections.sort(colors);
-        System.out.println("List after sorting " + colors);*/
+
+        Card card = new Card(Card.Suit.SPADES, Card.Face.Queen);
+        int i = Collections.binarySearch(decOfCards, card);
+        if (i >= 0) {
+            System.out.println("Card was found at position " + i);
+        } else {
+            System.out.println("Card was not found");
+        }
+
+        List<Card> cardList = new ArrayList<>(decOfCards);
+        Collections.fill(cardList, card);
+        Collections.addAll(cardList, card, card, card);
+        Collections.copy(cardList, decOfCards);
+        int frequency = Collections.frequency(cardList, card);
+        System.out.println("Frequency of " + card + " is " + frequency);
+
+        System.out.println("Min: " + Collections.min(cardList));
+        System.out.println("Max: " + Collections.max(cardList));
+
+        //printOutPut(cardList);
+
+        // System.out.println("\n\nCards after shuffle");
+        // printOutPut(decOfCards);
+
+        //System.out.println("Cards after sorting");
+        //   printOutPut(decOfCards);
 
     }
 
-    public static class Card  implements Comparable<Card>{
+    private static void printOutPut(List<Card> decOfCards) {
+        for (int i = 0; i < decOfCards.size(); i++) {
+            System.out.printf("%-20s %s", decOfCards.get(i), (i + 1) % 4 == 0 ? "\n" : " ");
+        }
+    }
+
+    public static class Card implements Comparable<Card> {
 
 
         private enum Suit {SPADES, HEARTS, CLUBS, DIMONDS}
@@ -41,7 +69,7 @@ public class CollectionRunner {
             return suit;
         }
 
-        public Face getFece() {
+        public Face getFace() {
             return face;
         }
 
@@ -50,15 +78,49 @@ public class CollectionRunner {
             Face[] values = Face.values();
             List<Face> faces = Arrays.asList(values);
 
-            if (faces.indexOf(this.face)<faces.indexOf(card.getFace)){
+            if (faces.indexOf(this.face) < faces.indexOf(card.getFace())) {
                 return -1;
-            } else if (faces.indexOf(this.face)==faces.indexOf(card.getFace())) {
+            } else if (faces.indexOf(this.face) > faces.indexOf(card.getFace())) {
+                return +1;
+            } else if (faces.indexOf(this.face) == faces.indexOf(card.getFace())) {
                 return String.valueOf(suit).compareTo(String.valueOf(card.getSuit()));
-
             }
-
             return 0;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            Card card = (Card) o;
+            return suit == card.suit && face == card.face;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(suit, face);
+        }
+
+        @Override
+        public String toString() {
+            return face + " of " + suit;
+        }
     }
+
+    public static class CardComparator implements Comparator<Card> {
+        List<Card.Face> faces = Arrays.asList(Card.Face.values());
+
+
+        @Override
+        public int compare(Card card1, Card card2) {
+            if (faces.indexOf(card1.getFace()) < faces.indexOf(card2.getFace())) {
+                return 1;
+            } else if (faces.indexOf(card1.getFace()) > faces.indexOf(card2.getFace())) {
+                return -1;
+            } else if (faces.indexOf(card1.getFace()) == faces.indexOf(card2.getFace())) {
+                return String.valueOf(card1.getSuit()).compareTo(String.valueOf(card2.getSuit()));
+            }
+            return 0;
+        }
+    }
+
 }
