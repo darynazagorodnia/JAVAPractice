@@ -20,15 +20,22 @@ public class MapLauncher {
                 wordMap.put(word, count + 1);
             }
         }
-        printMap(wordMap);
+
+        NavigableSet<WordWrapper> wordWrappers = convertToSet(wordMap);
+        printSet(wordWrappers);
 
     }
-    private static void printMap(Map<String, Integer>wordMap){
-        Map<String, Integer>wordTreeMap = new TreeMap<>(wordMap);
-        Set<String> keys = wordMap.keySet();
-        for (String key:keys){
-            System.out.printf("%-10s%-10s\n", key, wordMap.get(key));
+    private static void printSet(NavigableSet<WordWrapper> wordWrappers){
+
+    }
+
+
+    private static NavigableSet<WordWrapper> convertToSet (Map<String, Integer> wordMap) {
+        NavigableSet<WordWrapper> wordSet = new TreeSet<>();
+        for (Map.Entry<String, Integer> e : wordMap.entrySet()) {
+            wordSet.add(new WordWrapper(e.getKey(), e.getValue()));
         }
-
+        return wordSet;
     }
+
 }
