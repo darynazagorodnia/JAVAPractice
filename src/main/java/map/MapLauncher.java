@@ -10,7 +10,7 @@ public class MapLauncher {
         System.out.println("Please enter some text");
         Scanner scanner = new Scanner(System.in);
         String string = scanner.nextLine();
-        String[] tokens = string.split("");
+        String[] tokens = string.split(" ");
         for (String token : tokens) {
             String word = token.toLowerCase();
             Integer count = wordMap.get(word);
@@ -20,22 +20,23 @@ public class MapLauncher {
                 wordMap.put(word, count + 1);
             }
         }
-
-        NavigableSet<WordWrapper> wordWrappers = convertToSet(wordMap);
-        printSet(wordWrappers);
+        Set<WordWrapper> wordWrappers = convertToSet(wordMap);
+        wordWrappers.add(new WordWrapper(" ", 234));
+       // printSet(wordWrappers);
 
     }
     private static void printSet(NavigableSet<WordWrapper> wordWrappers){
-
+        for (WordWrapper wordWrapper : wordWrappers){
+            System.out.println(wordWrapper);
+        }
     }
-
-
-    private static NavigableSet<WordWrapper> convertToSet (Map<String, Integer> wordMap) {
+    private static Set<WordWrapper> convertToSet (Map<String, Integer> wordMap) {
+        wordMap.remove("a");
+        wordMap.replace("the",0);
         NavigableSet<WordWrapper> wordSet = new TreeSet<>();
         for (Map.Entry<String, Integer> e : wordMap.entrySet()) {
             wordSet.add(new WordWrapper(e.getKey(), e.getValue()));
         }
-        return wordSet;
+        return Collections.unmodifiableSet(wordSet);
     }
-
 }
