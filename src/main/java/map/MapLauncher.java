@@ -7,7 +7,7 @@ import java.util.*;
 public class MapLauncher {
     public static void main(String[] args) {
         Map<String, Integer> wordMap = new HashMap<>();
-        System.out.println("Please enter some text");
+        System.out.println("Please en    ter some text");
         Scanner scanner = new Scanner(System.in);
         String string = scanner.nextLine();
         String[] tokens = string.split(" ");
