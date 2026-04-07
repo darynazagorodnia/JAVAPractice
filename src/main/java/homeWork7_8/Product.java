@@ -10,6 +10,16 @@ public class Product {
     double price;
     boolean availability;
 
+    public Product(String name, double price, boolean availability) {
+        this.name = name;
+        this.availability = availability;
+        if (price >= 0) {
+            this.price = price;
+        } else if (price <= 0) {
+            throw new PriceExceptionEx5HW8("Ціна не може бути від'ємною");
+        }
+    }
+
     public boolean isAvailability() {
         return availability;
     }
@@ -38,23 +48,11 @@ public class Product {
         }
     }
 
-    public Product(String name, double price, boolean availability) {
-        this.name = name;
-
-        this.availability = availability;
-        if (price >= 0) {
-            this.price = price;
-        } else if (price <= 0) {
-            throw new PriceExceptionEx5HW8("Ціна не може бути від'ємною");
-        }
-
-    }
-
     public void printProductInfo() {
-        System.out.println("Інформація про товар: ");
-        System.out.println("Назва " + name);
-        System.out.println("Ціна: " + price + " грн");
-        System.out.println("В наявності: " + (availability ? "Так" : "Ні"));
+        System.out.println("Інформація про товар: \n" +
+                "Назва: " + name + "\n" +
+                "Ціна: " + price + " грн \n" +
+                "В наявності: " + (availability ? "Так" : "Ні"));
     }
 
     @Override
@@ -72,7 +70,6 @@ public class Product {
         Product laptop = new Product("Lenovo", 35000.0, false);
         laptop.printProductInfo();
 
-
         System.out.println();
 
         ArrayList<Product> goods = new ArrayList<>();
@@ -85,6 +82,7 @@ public class Product {
         for (Product item : goods) {
             System.out.println(item);
         }
+
         System.out.println();
 
         HashSet<String> departments = new HashSet<>();
@@ -108,15 +106,19 @@ public class Product {
         categories.put("Електроніка", 80000.0);
         categories.put("Побутова техніка", 950000.0);
 
+        for (Map.Entry<String, Double> entry : categories.entrySet()) {
+            System.out.println(entry.getKey() + "=" + entry.getValue());
+        }
+
         Map<String, Product> store = new HashMap<>();
         store.put("Одяг", new Product("Джемпер", 1750.5, false));
         store.put("Електроніка", new Product("Ноутбук Lenovo", 50000.0, true));
         store.put("Побутова техніка", new Product("Холодильник", 25000, true));
-
+// переробити іншим способом
         try {
             Product targetProduct = store.get("Електроніка");
             targetProduct.setPrice(-100.0);
-        } catch (PriceExceptionEx5HW8 e){
+        } catch (PriceExceptionEx5HW8 e) {
             System.out.println("Тест пройшов: отримано очікувану помилку: " + e.getMessage());
         }
 
